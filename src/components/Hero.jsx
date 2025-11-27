@@ -1,85 +1,189 @@
-// src/components/Hero.jsx
 import { motion } from "framer-motion";
-import profile_pic from "../assets/iamges/profile_pic.jpg";
+import { FiGithub, FiLinkedin, FiMail, FiExternalLink } from "react-icons/fi";
+import profile_pic from "../assets/images/profile_pic.jpg";
 
 export default function Hero() {
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty("--mouse-x", `${x}%`);
+    card.style.setProperty("--mouse-y", `${y}%`);
+  };
+
   return (
-    <div className="w-full flex flex-col md:flex-row items-center gap-12 py-12">
-      {/* Left text */}
+    <div className="w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-16 py-20 lg:py-24">
+      {/* Left Content */}
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="flex-1"
+        transition={{ duration: 0.7 }}
+        className="flex-1 text-center lg:text-left"
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-gray-900 dark:text-white">
-          Poh Wai Khang
-        </h1>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-          Front-End Developer · Software Engineer
-          <span className="block mt-2 text-sm text-gray-500 dark:text-gray-400">
-            Building clean, performant user interfaces — modern React,
-            TypeScript, and Tailwind.
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="inline-block px-4 py-2 mb-6 glass rounded-full"
+        >
+          <span className="text-sm font-medium text-[var(--text-secondary)]">
+            👋 Welcome to my portfolio
           </span>
-        </p>
+        </motion.div>
 
-        <div className="mt-8 flex gap-4">
-          <a
-            href="/PohWaiKhang-CV.pdf"
-            className="px-5 py-3 rounded-md glass border border-gray-200/40 dark:border-white/6 text-sm font-medium hover:shadow-lg"
-            download
-          >
-            Download CV
-          </a>
+        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-4">
+          <span className="text-[var(--text-primary)]">Hi, I'm </span>
+          <span className="gradient-text block mt-2">Poh Wai Khang</span>
+        </h1>
 
-          <a
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-lg sm:text-xl text-[var(--text-secondary)] mb-2 max-w-2xl mx-auto lg:mx-0"
+        >
+          Front-End Developer · Software Engineer
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-base text-[var(--text-muted)] mb-8 max-w-2xl mx-auto lg:mx-0"
+        >
+          Building clean, performant user interfaces with modern React,
+          TypeScript, and Tailwind CSS.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
+        >
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="#projects"
-            className="px-5 py-3 rounded-md bg-gray-900 text-white text-sm font-medium hover:opacity-95"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
           >
             View Projects
-          </a>
-        </div>
+            <FiExternalLink className="w-4 h-4" />
+          </motion.a>
+
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="/PohWaiKhang-CV.pdf"
+            download
+            className="px-6 py-3 rounded-xl glass font-medium hover:shadow-lg transition-all text-[var(--text-primary)]"
+          >
+            Download CV
+          </motion.a>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="flex gap-4 justify-center lg:justify-start"
+        >
+          {[
+            { icon: FiGithub, href: "#", label: "GitHub" },
+            {
+              icon: FiLinkedin,
+              href: "https://www.linkedin.com/in/jeremypoh0205",
+              label: "LinkedIn",
+            },
+            {
+              icon: FiMail,
+              href: "mailto:Jeremypoh0205@gmail.com",
+              label: "Email",
+            },
+          ].map(({ icon: Icon, href, label }) => (
+            <motion.a
+              key={label}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 glass rounded-xl hover:shadow-lg transition-all text-[var(--text-primary)]"
+              aria-label={label}
+            >
+              <Icon className="w-5 h-5" />
+            </motion.a>
+          ))}
+        </motion.div>
       </motion.div>
 
-      {/* Right visual card */}
+      {/* Right Visual Card */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.08 }}
-        className="flex-1 flex justify-center"
+        transition={{ duration: 0.7, delay: 0.3 }}
+        className="flex-1 flex justify-center lg:justify-end w-full max-w-md lg:max-w-sm"
       >
-        <div className="tilt-card glass p-6 max-w-sm w-full">
-          <div className="relative">
-            <div className="rounded-xl overflow-hidden">
-              <img
-                src={profile_pic}
-                alt="profile"
-                className="w-full h-56 object-contain bg-black/10"
-              />
-            </div>
+        <motion.div
+          whileHover={{ y: -8 }}
+          onMouseMove={handleCardMouseMove}
+          className="glass-spotlight glass p-5 w-full relative group"
+        >
+          {/* Decorative elements */}
+          <div className="absolute -top-4 -right-4 w-20 h-8 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-2xl" />
+          <div className="absolute -bottom-4 -left-4 w-24 h-12 bg-gradient-to-tr from-pink-500/20 to-orange-500/20 rounded-full blur-2xl" />
 
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Poh Wai Khang
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-300 mt-1">
-                Software Engineering Graduate • Front-End Dev
-              </p>
-
-              <div className="mt-3 flex gap-2 flex-wrap">
-                <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700">
-                  React
-                </span>
-                <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700">
-                  Next.js
-                </span>
-                <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-700">
-                  Tailwind
+          <div className="relative z-10">
+            {/* Image Container */}
+            <div className="relative mb-4">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity" />
+              <div className="relative rounded-2xl overflow-hidden border-2 border-white/20">
+                <img
+                  src={profile_pic}
+                  alt="Poh Wai Khang"
+                  className="w-full h-64 sm:h-66 object-cover "
+                />
+              </div>
+              {/* Status Badge */}
+              <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1.5 glass rounded-full flex items-center gap-2 shadow-lg">
+                <div className="relative">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                </div>
+                <span className="text-xs font-medium text-[var(--text-primary)]">
+                  Available for hire
                 </span>
               </div>
             </div>
+
+            {/* Info */}
+            <div className="text-center space-y-3 pt-2">
+              <div>
+                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-0.5">
+                  Poh Wai Khang
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)]">
+                  Software Engineering Graduate
+                </p>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {["React", "Next.js", "TypeScript", "Tailwind"].map((tech) => (
+                  <motion.span
+                    key={tech}
+                    whileHover={{ scale: 1.1 }}
+                    className="px-2.5 py-1 text-xs font-medium glass rounded-lg text-[var(--text-primary)]"
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );
