@@ -1,0 +1,23 @@
+# this file is used by AWS CodeBuild to build the React application 
+# and tells codebuild to install dependencies, build the app and copy the contents of the
+# build folder as artifacts for deployment
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm ci --legacy-peer-deps
+
+  build:
+    commands:
+      - echo Building the React app...
+      - npm run build
+
+artifacts: #this usually deployed to S3 or other hosting service
+  files:
+    - '**/*'
+  base-directory: dist #tell code build to look for build files in the dist folder
+  discard-paths: no
