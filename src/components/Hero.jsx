@@ -133,7 +133,7 @@ export default function Hero() {
         >
           {/* Decorative elements */}
           <div className="absolute -top-4 -right-4 w-20 h-8 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-2xl" />
-          <div className="absolute -bottom-4 -left-4 w-24 h-12 bg-gradient-to-tr from-pink-500/20 to-orange-500/20 rounded-full blur-2xl" />
+          <div className="absolute -bottom-4 -left-4 w-24 h-8 bg-gradient-to-tr from-pink-500/20 to-orange-500/20 rounded-full blur-2xl" />
 
           <div className="relative z-10">
             {/* Image Container */}
@@ -143,7 +143,7 @@ export default function Hero() {
                 <img
                   src={profile_pic}
                   alt="Poh Wai Khang"
-                  className="w-full h-64 sm:h-66 object-cover "
+                  className="w-full h-56 sm:h-56 object-cover "
                 />
               </div>
               {/* Status Badge */}
