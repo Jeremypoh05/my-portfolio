@@ -1,58 +1,9 @@
-// src/components/Projects.jsx
 import { motion } from "framer-motion";
-import { FiExternalLink, FiGithub, FiAward } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiExternalLink } from "react-icons/fi";
+import profile_pic from "../assets/images/MyPic.png";
+import { div } from "framer-motion/client";
 
-const projects = [
-  {
-    title: "SaaS-Based Unified Platform",
-    subtitle: "Final Year Project",
-    desc: "Multi-tenant SaaS with integrated website builder and Kanban project management. Earned Gold Award at InIIC 2024.",
-    link: "https://jplura-official.vercel.app",
-    github:
-      "https://github.com/Jeremypoh05/JPlura-SaaS-Project-Management-Website-Builder",
-    tags: ["Next.js", "Node.js", "PostgreSQL", "Tailwind", "SaaS", "Stripe"],
-    featured: true,
-    gradient: "from-blue-500 to-purple-600",
-  },
-  {
-    title: "EMenu System",
-    subtitle: "E-Commerce Platform",
-    desc: "Online merchant menu platform with responsive UI and real-time order management.",
-    link: "https://emenu.com.my/mygrocery",
-    github: "https://github.com/Jeremypoh05/Emenu",
-    tags: ["Vue.js", "Nuxt.js", "API Integration"],
-    gradient: "from-green-500 to-teal-600",
-  },
-  {
-    title: "Discord Clone",
-    subtitle: "Chat Application",
-    desc: "Full-stack real-time chat application featuring direct messaging, voice channels, and server management.",
-    link: "https://discord-production-cc86.up.railway.app",
-    github: "https://github.com/Jeremypoh05/discord",
-    tags: ["Next.js", "Web Socket", "Tailwind"],
-    gradient: "from-purple-500 to-indigo-600",
-  },
-  {
-    title: "Spotify Clone",
-    subtitle: "Music Streaming App",
-    desc: "Full-featured music player with playlist management and audio playback controls.",
-    link: "https://spotify-project-six.vercel.app/",
-    github: "https://github.com/Jeremypoh05/spotify-project",
-    tags: ["Next.js", "Typescript", "Tailwind"],
-    gradient: "from-pink-500 to-rose-600",
-  },
-  {
-    title: "Portfolio Website",
-    subtitle: "Personal Branding",
-    desc: "Modern, responsive portfolio showcasing projects and skills with smooth animations.",
-    link: "https://my-portfolio-jp1.s3.ap-southeast-1.amazonaws.com/index.html",
-    github: "https://github.com/Jeremypoh05/my-portfolio",
-    tags: ["React", "Framer Motion", "Tailwind"],
-    gradient: "from-purple-500 to-indigo-600",
-  },
-];
-
-export default function Projects() {
+export default function Hero() {
   const handleCardMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -63,168 +14,184 @@ export default function Projects() {
   };
 
   return (
-    <div className="w-full">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-          <span className="gradient-text">Featured Projects</span>
-        </h2>
-        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto px-4">
-          A collection of my recent work and side projects
-        </p>
-      </motion.div>
-
-      <div className="grid sm:grid-cols-2 gap-6">
-        {projects.map((project, idx) => (
+    <div classNcla="w-full">
+      <div className="w-full flex flex-col lg:flex-row items-center gap-6 lg:gap-8 pt-22 lg:pt-24">
+        {/* Left Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="flex-1 text-center lg:text-left"
+        >
           <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="inline-block px-4 py-2 mb-6 glass rounded-full"
+          >
+            <span className="text-sm font-medium text-[var(--text-secondary)]">
+              👋 Welcome to my portfolio
+            </span>
+          </motion.div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-2">
+            <span className="text-[var(--text-primary)]">Hi, I'm </span>
+            <span className="gradient-text block mt-2">Poh Wai Khang</span>
+          </h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-lg sm:text-xl text-[var(--text-secondary)] mb-2 max-w-2xl mx-auto lg:mx-0"
+          >
+            Web Developer · Software Engineer
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-base text-[var(--text-muted)] mb-8 max-w-2xl mx-auto lg:mx-0"
+          >
+            Crafting modern web experiences using React, TypeScript, and
+            Node.js - Solving real problems with end-to-end solutions.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
+          >
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#projects"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+            >
+              View Projects
+              <FiExternalLink className="w-4 h-4" />
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/PohWaiKhang-CV.pdf"
+              download
+              className="px-6 py-3 rounded-xl glass font-medium hover:shadow-lg transition-all text-[var(--text-primary)]"
+            >
+              Download CV
+            </motion.a>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="flex gap-4 justify-center lg:justify-start"
+          >
+            {[
+              {
+                icon: FiGithub,
+                href: "https://github.com/Jeremypoh05",
+                label: "GitHub",
+              },
+              {
+                icon: FiLinkedin,
+                href: "https://www.linkedin.com/in/jeremypoh0205",
+                label: "LinkedIn",
+              },
+              {
+                icon: FiMail,
+                href: "mailto:Jeremypoh0205@gmail.com",
+                label: "Email",
+              },
+            ].map(({ icon: Icon, href, label }) => (
+              <motion.a
+                key={label}
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 glass rounded-xl hover:shadow-lg transition-all text-[var(--text-primary)]"
+                aria-label={label}
+              >
+                <Icon className="w-5 h-5" />
+              </motion.a>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Right Visual Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex-1 flex justify-center lg:justify-end w-full max-w-md lg:max-w-sm"
+        >
+          <motion.div
             whileHover={{ y: -8 }}
             onMouseMove={handleCardMouseMove}
-            className={`glass-spotlight glass p-6 sm:p-8 group relative h-fit ${
-              project.featured ? "sm:col-span-2" : ""
-            }`}
+            className="glass-spotlight glass p-4 w-full relative group"
           >
-            {/* Gradient Background */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity rounded-2xl`}
-            />
-
-            {/* Badge and Icons - Top Right Corner */}
-            {project.featured && (
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex flex-col items-end gap-2 z-20">
-                {/* Gold Award Badge */}
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
-                  <FiAward className="w-3.5 h-3.5 text-yellow-500" />
-                  <span className="text-xs font-bold text-yellow-600 dark:text-yellow-400 whitespace-nowrap">
-                    Gold Award
-                  </span>
-                </div>
-
-                {/* Icons */}
-                <div className="flex gap-2">
-                  <motion.a
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)] backdrop-blur-sm"
-                    aria-label="View project"
-                  >
-                    <FiExternalLink className="w-4 h-4" />
-                  </motion.a>
-                  <motion.a
-                    whileHover={{ scale: 1.1, rotate: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)] backdrop-blur-sm"
-                    aria-label="View GitHub"
-                  >
-                    <FiGithub className="w-4 h-4" />
-                  </motion.a>
-                </div>
-              </div>
-            )}
+            {/* Decorative elements */}
 
             <div className="relative z-10">
-              {/* Header */}
-              <div
-                className={`mb-4 ${
-                  project.featured
-                    ? "pr-24 sm:pr-32"
-                    : "flex items-start justify-between gap-4"
-                }`}
-              >
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--text-primary)] mb-1 group-hover:gradient-text transition-all break-words">
-                    {project.title}
+              {/* Image Container */}
+              <div className="relative mb-4">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity" />
+                <div className="relative rounded-2xl overflow-hidden border-2 border-white/20">
+                  <img
+                    src={profile_pic}
+                    alt="Poh Wai Khang"
+                    className="w-full h-full object-cover "
+                  />
+                </div>
+                {/* Status Badge */}
+                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1.5 glass rounded-full flex items-center gap-2 shadow-lg">
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                  </div>
+                  <span className="text-xs font-medium text-[var(--text-primary)]">
+                    Available for hire
+                  </span>
+                </div>
+              </div>
+
+              {/* Info */}
+              <div className="text-center space-y-3 pt-2">
+                <div>
+                  <h3 className="text-lg font-bold text-[var(--text-primary)] mb-0.5">
+                    Poh Wai Khang
                   </h3>
-                  <p className="text-sm text-[var(--text-muted)]">
-                    {project.subtitle}
+                  <p className="text-xs text-[var(--text-secondary)]">
+                    Software Engineering Graduate
                   </p>
                 </div>
 
-                {/* Icons for non-featured projects */}
-                {!project.featured && (
-                  <div className="flex gap-2 flex-shrink-0">
-                    <motion.a
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
-                      aria-label="View project"
-                    >
-                      <FiExternalLink className="w-5 h-5" />
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.1, rotate: -5 }}
-                      whileTap={{ scale: 0.9 }}
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
-                      aria-label="View GitHub"
-                    >
-                      <FiGithub className="w-5 h-5" />
-                    </motion.a>
-                  </div>
-                )}
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-1.5 justify-center">
+                  {["React", "Next.js", "TypeScript", "Tailwind"].map(
+                    (tech) => (
+                      <motion.span
+                        key={tech}
+                        whileHover={{ scale: 1.1 }}
+                        className="px-2.5 py-1 text-xs font-medium glass rounded-lg text-[var(--text-primary)]"
+                      >
+                        {tech}
+                      </motion.span>
+                    )
+                  )}
+                </div>
               </div>
-
-              {/* Description */}
-              <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                {project.desc}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <motion.span
-                    key={tag}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-3 py-1.5 text-xs font-medium glass rounded-lg text-[var(--text-primary)]"
-                  >
-                    {tag}
-                  </motion.span>
-                ))}
-              </div>
-
-              {/* Hover Effect Line */}
-              <div className="mt-6 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
             </div>
           </motion.div>
-        ))}
+        </motion.div>
       </div>
-
-      {/* View More Button */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-center mt-12"
-      >
-        {/* <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          href="#"
-          className="inline-flex items-center gap-2 px-6 py-3 glass rounded-xl font-medium hover:shadow-lg transition-all text-[var(--text-primary)]"
-        >
-          View All Projects
-          <FiExternalLink className="w-4 h-4" />
-        </motion.a> */}
-      </motion.div>
     </div>
   );
 }

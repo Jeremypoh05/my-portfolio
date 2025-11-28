@@ -97,40 +97,29 @@ export default function Projects() {
               className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity rounded-2xl`}
             />
 
-            <div className="relative z-10">
-              {/* Header with Award Badge */}
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <div className="flex-1 min-w-0">
-                  {/* Title and Badge Row */}
-                  <div className="flex items-start gap-3 mb-2">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--text-primary)] group-hover:gradient-text transition-all break-words flex-1">
-                      {project.title}
-                    </h3>
-                    {project.featured && (
-                      <div className="flex-shrink-0 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
-                        <FiAward className="w-3.5 h-3.5 text-yellow-500" />
-                        <span className="text-xs font-bold text-yellow-600 dark:text-yellow-400 whitespace-nowrap">
-                          Gold Award
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-sm text-[var(--text-muted)]">
-                    {project.subtitle}
-                  </p>
+            {/* Badge and Icons - Top Right Corner */}
+            {project.featured && (
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex flex-col items-end gap-2 z-20">
+                {/* Gold Award Badge */}
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
+                  <FiAward className="w-3.5 h-3.5 text-yellow-500" />
+                  <span className="text-xs font-bold text-yellow-600 dark:text-yellow-400 whitespace-nowrap">
+                    Gold Award
+                  </span>
                 </div>
 
-                <div className="flex gap-2 flex-shrink-0">
+                {/* Icons */}
+                <div className="flex gap-2">
                   <motion.a
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
+                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)] backdrop-blur-sm"
                     aria-label="View project"
                   >
-                    <FiExternalLink className="w-5 h-5" />
+                    <FiExternalLink className="w-4 h-4" />
                   </motion.a>
                   <motion.a
                     whileHover={{ scale: 1.1, rotate: -5 }}
@@ -138,12 +127,60 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
+                    className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)] backdrop-blur-sm"
                     aria-label="View GitHub"
                   >
-                    <FiGithub className="w-5 h-5" />
+                    <FiGithub className="w-4 h-4" />
                   </motion.a>
                 </div>
+              </div>
+            )}
+
+            <div className="relative z-10">
+              {/* Header */}
+              <div
+                className={`mb-4 ${
+                  project.featured
+                    ? "pr-24 sm:pr-32"
+                    : "flex items-start justify-between gap-4"
+                }`}
+              >
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--text-primary)] mb-1 group-hover:gradient-text transition-all break-words">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)]">
+                    {project.subtitle}
+                  </p>
+                </div>
+
+                {/* Icons for non-featured projects */}
+                {!project.featured && (
+                  <div className="flex gap-2 flex-shrink-0">
+                    <motion.a
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
+                      aria-label="View project"
+                    >
+                      <FiExternalLink className="w-5 h-5" />
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      whileTap={{ scale: 0.9 }}
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 glass rounded-lg hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-600/10 transition-all text-[var(--text-primary)]"
+                      aria-label="View GitHub"
+                    >
+                      <FiGithub className="w-5 h-5" />
+                    </motion.a>
+                  </div>
+                )}
               </div>
 
               {/* Description */}
