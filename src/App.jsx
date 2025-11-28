@@ -11,7 +11,6 @@ export default function App() {
     <div className="min-h-screen">
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section - 100vh 居中 */}
         <section
           id="home"
           className="min-h-screen flex items-center justify-center pb-10"
@@ -20,7 +19,6 @@ export default function App() {
         </section>
         <div className="section-divider"></div>
 
-        {/* About Section - 自动高度,至少 100vh */}
         <section
           id="about"
           className="min-h-screen flex items-center justify-center py-10"
@@ -31,7 +29,6 @@ export default function App() {
         </section>
         <div className="section-divider"></div>
 
-        {/* Experience Section - 自动高度,至少 100vh */}
         <section
           id="experience"
           className="min-h-screen flex items-center justify-center py-10"
@@ -42,7 +39,6 @@ export default function App() {
         </section>
         <div className="section-divider"></div>
 
-        {/* Projects Section - 自动高度,至少 100vh */}
         <section
           id="projects"
           className="min-h-screen flex items-center justify-center py-10"
@@ -53,7 +49,6 @@ export default function App() {
         </section>
         <div className="section-divider"></div>
 
-        {/* Contact Section - 自动高度,至少 100vh */}
         <section
           id="contact"
           className="min-h-screen flex items-center justify-center py-14"

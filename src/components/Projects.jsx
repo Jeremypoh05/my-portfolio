@@ -99,7 +99,7 @@ export default function Projects() {
 
             {/* Badge and Icons - Top Right Corner */}
             {project.featured && (
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex flex-col items-end gap-2 z-20">
+              <div className="flex flex-col items-end gap-2 z-20">
                 {/* Gold Award Badge */}
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
                   <FiAward className="w-3.5 h-3.5 text-yellow-500" />
@@ -136,7 +136,7 @@ export default function Projects() {
               </div>
             )}
 
-            <div className="relative z-10">
+            <div className="relative z-20">
               {/* Header */}
               <div
                 className={`mb-4 ${

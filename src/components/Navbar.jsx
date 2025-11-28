@@ -1,6 +1,5 @@
-// src/components/Navbar.jsx
 import { useEffect, useState } from "react";
-import { FiSun, FiMoon, FiMenu, FiX, FiDownload } from "react-icons/fi";
+import { FiSun, FiMoon, FiMenu, FiX, FiDownload, FiArrowUp } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
 const sections = ["home", "about", "experience", "projects", "contact"];
@@ -8,6 +7,7 @@ const sections = ["home", "about", "experience", "projects", "contact"];
 export default function Navbar() {
   const [active, setActive] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [theme, setTheme] = useState(() => {
     return (
       (typeof window !== "undefined" && localStorage.getItem("theme")) ||
@@ -27,7 +27,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 220;
+      const scrollPos = window.scrollY + 200;
+      
+      // Show back to top button when scrolled down
+      setShowBackToTop(window.scrollY > 400);
+      
       sections.forEach((id) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -43,11 +47,47 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 100;
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      setIsOpen(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <>
-      <nav className="fixed top-4 left-0 right-0 z-50 px-4 md:px-6">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 pt-4">
         <motion.div
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -55,7 +95,9 @@ export default function Navbar() {
         >
           <div className="glass flex items-center justify-between p-3 md:p-4 shadow-lg">
             {/* Logo */}
-            <motion.div
+            <motion.a
+              href="#home"
+              onClick={(e) => handleNavClick(e, "home")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-3"
@@ -66,7 +108,7 @@ export default function Navbar() {
               <span className="hidden sm:block font-semibold text-[var(--text-primary)]">
                 Portfolio
               </span>
-            </motion.div>
+            </motion.a>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
@@ -74,6 +116,7 @@ export default function Navbar() {
                 <a
                   key={s}
                   href={`#${s}`}
+                  onClick={(e) => handleNavClick(e, s)}
                   className="relative px-4 py-2 rounded-lg transition-colors"
                 >
                   <span
@@ -145,55 +188,82 @@ export default function Navbar() {
         </motion.div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Fixed to viewport center with proper scrolling */}
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={toggleMenu}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] md:hidden"
+              style={{ position: 'fixed' }}
             />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-20 right-4 bottom-4 w-64 glass z-50 md:hidden p-6 shadow-2xl"
-            >
-              <div className="flex flex-col gap-2">
-                {sections.map((s, idx) => (
-                  <motion.a
-                    key={s}
-                    href={`#${s}`}
-                    onClick={toggleMenu}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className={`px-4 py-3 rounded-lg capitalize font-medium transition-all ${
-                      active === s
-                        ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-[var(--text-primary)]"
-                        : "text-[var(--text-secondary)] hover:bg-[var(--spotlight)]"
-                    }`}
-                  >
-                    {s}
-                  </motion.a>
-                ))}
-                <motion.a
-                  href="/PohWaiKhang-CV.pdf"
-                  download
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: sections.length * 0.1 }}
-                  className="mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium text-center hover:shadow-lg transition-all"
-                >
-                  Download CV
-                </motion.a>
-              </div>
-            </motion.div>
+            
+            {/* Menu Container - Fixed to viewport */}
+            <div className="fixed inset-0 z-[70] md:hidden flex items-center justify-center p-4 pointer-events-none">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="w-full max-w-md max-h-[80vh] glass shadow-2xl rounded-2xl pointer-events-auto"
+              >
+                <div className="overflow-y-auto max-h-[80vh] p-6">
+                  <div className="flex flex-col gap-2">
+                    {sections.map((s, idx) => (
+                      <motion.a
+                        key={s}
+                        href={`#${s}`}
+                        onClick={(e) => handleNavClick(e, s)}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.05 }}
+                        className={`px-4 py-3 rounded-lg capitalize font-medium transition-all ${
+                          active === s
+                            ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-[var(--text-primary)]"
+                            : "text-[var(--text-secondary)] hover:bg-[var(--spotlight)]"
+                        }`}
+                      >
+                        {s}
+                      </motion.a>
+                    ))}
+                    <motion.a
+                      href="/PohWaiKhang-CV.pdf"
+                      download
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: sections.length * 0.05 }}
+                      className="mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium text-center hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <FiDownload className="w-4 h-4" />
+                      <span>Download CV</span>
+                    </motion.a>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all"
+            aria-label="Back to top"
+          >
+            <FiArrowUp className="w-5 h-5" />
+          </motion.button>
         )}
       </AnimatePresence>
     </>
