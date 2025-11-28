@@ -1,6 +1,7 @@
 // src/components/Contact.jsx
 import { motion } from "framer-motion";
 import { FiMail, FiLinkedin, FiGithub, FiMapPin, FiSend } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 const contactMethods = [
   {
@@ -8,27 +9,34 @@ const contactMethods = [
     label: "Email",
     value: "Jeremypoh0205@gmail.com",
     href: "mailto:Jeremypoh0205@gmail.com",
-    gradient: "from-blue-500 to-cyan-500",
+    color: "text-blue-500",
   },
   {
     icon: FiLinkedin,
     label: "LinkedIn",
-    value: "jeremypoh0205",
+    value: "Poh Wai Khang",
     href: "https://www.linkedin.com/in/jeremypoh0205",
-    gradient: "from-blue-600 to-blue-400",
+    color: "text-blue-600",
+  },
+  {
+    icon: FaWhatsapp,
+    label: "WhatsApp",
+    value: "+60 11-1630 5241",
+    href: "https://wa.me/601116305241",
+    color: "text-green-500",
   },
   {
     icon: FiGithub,
     label: "GitHub",
-    value: "Your GitHub",
-    href: "#",
-    gradient: "from-gray-700 to-gray-500",
+    value: "https://github.com/Jeremypoh05",
+    href: "https://github.com/Jeremypoh05",
+    color: "text-gray-400",
   },
   {
     icon: FiMapPin,
     label: "Location",
-    value: "Singapore",
-    gradient: "from-green-500 to-emerald-500",
+    value: "Malaysia",
+    color: "text-emerald-500",
   },
 ];
 
@@ -43,7 +51,7 @@ export default function Contact() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -54,13 +62,14 @@ export default function Contact() {
           <span className="gradient-text">Get In Touch</span>
         </h2>
         <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
-          I'm available for internships and freelance opportunities. Let's build
-          something amazing together!
+          I am currently available for immediate Full-Time Web
+          Developer/Software Engineer positions. Send me an email and I look forward
+          to discussing your team's needs.
         </p>
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-8">
-        {/* Contact Info */}
+        {/* Contact Info - 简化设计 */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -75,7 +84,7 @@ export default function Contact() {
               Contact Information
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {contactMethods.map((method, idx) => (
                 <motion.div
                   key={idx}
@@ -96,38 +105,30 @@ export default function Contact() {
                           ? "noreferrer"
                           : undefined
                       }
-                      className="flex items-center gap-4 p-4 glass rounded-xl hover:shadow-lg transition-all group"
+                      className="flex items-center gap-4 p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--glass-border)] hover:border-[var(--accent)]/30 hover:shadow-lg transition-all group"
                     >
-                      <div
-                        className={`p-3 rounded-xl bg-gradient-to-br ${method.gradient} bg-opacity-10`}
-                      >
-                        <method.icon
-                          className={`w-5 h-5 bg-gradient-to-br ${method.gradient} bg-clip-text text-transparent`}
-                        />
+                      <div className="flex-shrink-0">
+                        <method.icon className={`w-6 h-6 ${method.color}`} />
                       </div>
-                      <div className="flex-1">
-                        <p className="text-xs text-[var(--text-muted)] mb-1">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-[var(--text-muted)] mb-0.5">
                           {method.label}
                         </p>
-                        <p className="text-sm font-medium text-[var(--text-primary)] group-hover:gradient-text transition-all">
+                        <p className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">
                           {method.value}
                         </p>
                       </div>
                     </a>
                   ) : (
-                    <div className="flex items-center gap-4 p-4 glass rounded-xl">
-                      <div
-                        className={`p-3 rounded-xl bg-gradient-to-br ${method.gradient} bg-opacity-10`}
-                      >
-                        <method.icon
-                          className={`w-5 h-5 bg-gradient-to-br ${method.gradient} bg-clip-text text-transparent`}
-                        />
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--glass-border)]">
+                      <div className="flex-shrink-0">
+                        <method.icon className={`w-6 h-6 ${method.color}`} />
                       </div>
-                      <div className="flex-1">
-                        <p className="text-xs text-[var(--text-muted)] mb-1">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs text-[var(--text-muted)] mb-0.5">
                           {method.label}
                         </p>
-                        <p className="text-sm font-medium text-[var(--text-primary)]">
+                        <p className="text-sm font-medium text-[var(--text-primary)] truncate">
                           {method.value}
                         </p>
                       </div>
@@ -144,9 +145,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onMouseMove={handleCardMouseMove}
-            className="glass-spotlight glass p-6 sm:p-8 text-center"
+            className="glass-spotlight glass p-6 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 glass rounded-full">
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-3 glass rounded-full">
               <div className="relative">
                 <div className="w-2 h-2 bg-green-500 rounded-full" />
                 <div className="absolute inset-0 w-2 h-2 bg-green-500 rounded-full animate-ping" />
@@ -177,13 +178,13 @@ export default function Contact() {
               Let's Work Together
             </h3>
             <p className="text-[var(--text-secondary)] max-w-md mx-auto">
-              I'm actively seeking front-end development opportunities in
+              I'm actively seeking web development opportunities in
               Singapore. Whether it's an internship, freelance project, or
               full-time role, I'd love to hear from you!
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -192,6 +193,18 @@ export default function Contact() {
             >
               <FiMail className="w-5 h-5" />
               Send me an email
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="https://wa.me/601116305241"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium shadow-lg hover:shadow-xl transition-all"
+            >
+              <FaWhatsapp className="w-5 h-5" />
+              Chat on WhatsApp
             </motion.a>
 
             <motion.a

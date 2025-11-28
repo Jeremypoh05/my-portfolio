@@ -1,21 +1,21 @@
 // src/components/About.jsx
 import { motion } from "framer-motion";
 import { FiAward, FiCode, FiTarget } from "react-icons/fi";
-import profile_pic from "../assets/images/profile_pic.jpg";
+import profile_pic from "../assets/images/MyPic.png";
 
 const stats = [
-  { icon: FiCode, label: "Projects", value: "10+" },
+  { icon: FiCode, label: "Projects", value: "5+" },
   { icon: FiAward, label: "Awards", value: "Gold" },
-  { icon: FiTarget, label: "Experience", value: "2+ Years" },
+  { icon: FiTarget, label: "Experience", value: "1 Year" },
 ];
 
 const skills = [
-  { name: "React", level: 90 },
+  { name: "React", level: 80 },
   { name: "Next.js", level: 85 },
-  { name: "TypeScript", level: 80 },
-  { name: "Tailwind CSS", level: 95 },
-  { name: "Prisma", level: 75 },
-  { name: "PostgreSQL", level: 70 },
+  { name: "TypeScript", level: 70 },
+  { name: "Tailwind CSS", level: 90 },
+  { name: "Laravel", level: 75 },
+  { name: "PostgreSQL", level: 60 },
 ];
 
 export default function About() {
@@ -29,7 +29,7 @@ export default function About() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -39,20 +39,20 @@ export default function About() {
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           <span className="gradient-text">About Me</span>
         </h2>
-        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto px-4">
           Passionate developer with a love for creating beautiful, functional
           web experiences
         </p>
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Profile Card */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           onMouseMove={handleCardMouseMove}
-          className="glass-spotlight glass p-6 text-center"
+          className="glass-spotlight glass p-6 text-center h-fit"
         >
           <div className="relative inline-block mb-4">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-xl opacity-50" />
@@ -68,8 +68,8 @@ export default function About() {
           <h4 className="text-xl font-bold text-[var(--text-primary)] mb-2">
             Poh Wai Khang
           </h4>
-          <p className="text-sm text-[var(--text-secondary)] mb-6">
-            Frontend Developer · Software Engineer
+          <p className="text-sm text-[var(--text-secondary)] mb-6 font-bold">
+            Web Developer · Software Engineer
           </p>
 
           {/* Stats */}
@@ -105,36 +105,44 @@ export default function About() {
           {/* Bio */}
           <div
             onMouseMove={handleCardMouseMove}
-            className="glass-spotlight glass p-6 sm:p-8"
+            className="glass-spotlight glass p-6 sm:p-8 h-fit"
           >
             <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2">
               <span className="text-2xl">💼</span>
               My Journey
             </h3>
-            <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
-              I'm a Software Engineering graduate with strong experience in
-              React, Next.js and Tailwind CSS. My final year project — a
-              multi-tenant SaaS platform with an integrated website builder —
-              earned the{" "}
-              <span className="font-semibold text-[var(--text-primary)]">
-                Gold Award at InIIC 2024
-              </span>
-              .
-            </p>
-            <p className="text-[var(--text-secondary)] leading-relaxed">
-              I enjoy building polished, user-centered interfaces and improving
-              performance for scalable web apps. I'm actively seeking a{" "}
-              <span className="font-semibold text-[var(--text-primary)]">
-                Front-End Development internship in Singapore
-              </span>{" "}
-              to gain real-world experience and grow into a full-time role.
-            </p>
+            <div className="space-y-3 text-[var(--text-secondary)] leading-relaxed text-justify">
+              <p>
+                I'm a Software Engineering graduate with practical experience in
+                building modern web applications using React, Next.js, and
+                Tailwind CSS. My Final Year Project was an all-in-one
+                multi-tenant SaaS platform that combines project lifecycle
+                management with a built-in drag-and-drop website builder. This
+                unified system helps businesses manage projects and client
+                websites without relying on multiple tools, and it earned the&nbsp;
+                <span className="font-semibold text-[var(--text-primary)]">
+                  Gold Award at InIIC 2024
+                </span>
+                .
+              </p>
+              <p>
+                I enjoy crafting polished, user-focused interfaces and
+                for scalable web applications. I am
+                currently seeking a&nbsp;
+                <span className="font-semibold text-[var(--text-primary)]">
+                  full-time Front-End or Full-Stack Developer position in
+                  Singapore&nbsp;
+                </span>
+                where I can contribute to production-level projects while
+                continuously developing my technical expertise.
+              </p>
+            </div>
           </div>
 
           {/* Skills */}
           <div
             onMouseMove={handleCardMouseMove}
-            className="glass-spotlight glass p-6 sm:p-8"
+            className="glass-spotlight glass p-6 sm:p-8 h-fit"
           >
             <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6 flex items-center gap-2">
               <span className="text-2xl">🚀</span>
