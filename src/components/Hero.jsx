@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <div classNcla="w-full">
-      <div className="w-full flex flex-col lg:flex-row items-center gap-6 lg:gap-8 pt-18 lg:pt-24">
+      <div className="w-full flex flex-col lg:flex-row items-center gap-6 lg:gap-8 pt-22 lg:pt-24">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
