@@ -37,10 +37,7 @@ export default function Navbar() {
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
 
-      // Change navbar style when scrolled
       setScrolled(window.scrollY > 50);
-
-      // Show back to top button when scrolled down
       setShowBackToTop(window.scrollY > 400);
 
       sections.forEach((id) => {
@@ -58,7 +55,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -329,39 +325,19 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Enhanced Back to Top Button */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.1, rotate: 360 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all relative overflow-hidden group/back"
-          >
-            {/* Pulse ring */}
-            <motion.div
-              animate={{
-                scale: [1, 1.5],
-                opacity: [0.5, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
-              className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600"
-            />
-
-            {/* Glow */}
-            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/back:opacity-100 transition-opacity blur-xl" />
-
-            <FiArrowUp className="w-5 h-5 relative z-10" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {/* Back to Top Button with smooth transition */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 ${
+          showBackToTop
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-16 pointer-events-none"
+        }`}
+        style={{ zIndex: 9999 }}
+        aria-label="Back to top"
+      >
+        <FiArrowUp className="w-5 h-5" />
+      </button>
     </>
   );
 }
